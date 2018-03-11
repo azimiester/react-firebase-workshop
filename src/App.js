@@ -13,18 +13,17 @@ class App extends Component {
       currentUser: null,
       messages: []
     };
-    this.handleSignIn = this.handleSignIn.bind(this);
     this.handleNewMessage = this.handleNewMessage.bind(this);
+    this.chatRef = database.ref('/chat');
   }
-
-  handleSignIn() {
-    this.setState({
-      currentUser: {
-        displayName: "Kamal Memon",
-        photoURL:
-          "http://lorempixel.com/400/400/animals",
-        email: "memonkamal7@gmail.com"
-      }
+  componentWillMount(){
+    auth.onAuthStateChanged((currentUser)=>{
+      const user = {email: currentUser.email, displayName: currentUser.displayName, photoURL: currentUser.photoURL};
+      this.setState({currentUser: user});
+    });
+    this.chatRef.on('value', (snapshot) => {
+      console.log(snapshot);
+      this.setState({ messages: snapshot.val() });
     });
   }
   handleNewMessage(message) {
@@ -33,7 +32,8 @@ class App extends Component {
       user: this.state.currentUser,
       time: new Date().getTime()
     }
-    this.setState({messages : [...this.state.messages , newMessage]});
+    //this.setState({messages : [...this.state.messages , newMessage]});
+    this.chatRef.push(newMessage);
     console.log(this.state.messages);
   }
 
@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <div className="App">
       <div className="App--sidebar">
-        {!this.state.currentUser && <SignIn handleSignIn={this.handleSignIn} />}
+        {!this.state.currentUser && <SignIn  />}
         {this.state.currentUser && (
           <CurrentUser currentUser={this.state.currentUser} />
         )}
