@@ -20,10 +20,10 @@ class App extends Component {
   handleSignIn() {
     this.setState({
       currentUser: {
-        displayName: "Nawaz Sharif",
+        displayName: "Kamal Memon",
         photoURL:
-          "https://resize.indiatvnews.com/en/resize/newbucket/715_-/2018/02/nawaz-1518614509.jpg",
-        email: "test email"
+          "http://lorempixel.com/400/400/animals",
+        email: "memonkamal7@gmail.com"
       }
     });
   }
@@ -40,6 +40,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <div className="App--sidebar">
         {!this.state.currentUser && <SignIn handleSignIn={this.handleSignIn} />}
         {this.state.currentUser && (
           <CurrentUser currentUser={this.state.currentUser} />
@@ -47,6 +48,7 @@ class App extends Component {
         {this.state.currentUser && (
           <NewMessage handleNewMessage={this.handleNewMessage} />
         )}
+      </div>
         <Messages messages={this.state.messages} />
       </div>
     );

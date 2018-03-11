@@ -5,14 +5,13 @@ const Message = ({ key, message, user, time }) => (
   <article className="Message">
     <div className="Message--avatar">
       <img
+        className="Message--display"
         alt="presentation"
         src={user.photoURL}
       />
     </div>
-    <div className="Message--main">
-      <h4 className="Message--user">{ user.displayName }</h4>
-      <p className="Message--content">{ message }</p>
-    </div>
+      <p className="Message--user">{ user.displayName }: <span className="Message--content">{ message }</span></p>
+
   </article>
 );
 
