@@ -3,6 +3,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 The application is live and hosted at:
 https://react-firebase-test-f070a.firebaseapp.com/
 
+The video of the live coding session is available on the facebook group (Software Development Pakistan).
+
 ## Dependencies:
 * Node
 * Git
